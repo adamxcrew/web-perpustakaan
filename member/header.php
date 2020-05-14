@@ -26,6 +26,7 @@ $nama = mysqli_fetch_assoc($result)['nama'];
                     <a class="nav-item nav-link <?= ($title == 'Home' ? 'active' : '') ?>" href="<?= BASE_URL ?>/member">Home</a>
                     <a class="nav-item nav-link <?= ($title == 'Daftar Buku' ? 'active' : '') ?>" href="<?= BASE_URL ?>/member/daftar-buku.php">Daftar Buku</a>
                     <a class="nav-item nav-link <?= ($title == 'Daftar Pinjaman' ? 'active' : '') ?>" href="<?= BASE_URL ?>/member/daftar-pinjaman.php">Pinjaman Buku</a>
+                    <a class="nav-item nav-link <?= ($title == 'Kontak' ? 'active' : '') ?>" href="<?= BASE_URL ?>/member/kontak.php">Hubungi Kami</a>
                 </div>
                 <div class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
@@ -33,6 +34,7 @@ $nama = mysqli_fetch_assoc($result)['nama'];
                             Hello <?= $nama ?>!
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                            <a class="dropdown-item" href="<?= BASE_URL ?>/member/profil.php">Profil</a>
                             <a class="dropdown-item" onclick="return confirm('Apakah anda yakin ingin keluar?')" href="<?= BASE_URL ?>/logout.php">Logout</a>
                         </div>
                     </li>
