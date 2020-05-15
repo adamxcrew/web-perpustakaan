@@ -31,7 +31,7 @@ $nama = mysqli_fetch_assoc($result)['nama'];
                 <div class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            Hello <?= $nama ?>!
+                            <?= $nama ?>
                         </a>
                         <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                             <a class="dropdown-item" href="<?= BASE_URL ?>/member/profil.php">Profil</a>

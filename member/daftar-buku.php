@@ -1,10 +1,21 @@
 <?php
 session_start();
+include '../koneksi.php';
 include '../functions.php';
 
 //Cek apakah sudah login dan member
 if (!isLogin() || !isMember()) {
     header('Location:../login.php');
+}
+
+//Ambil data buku dari tabel buku join dengan kategori
+$sql = "SELECT buku.id, judul, tahun_terbit, kategori.nama_kategori FROM buku
+        JOIN kategori ON id_kategori = kategori.id
+        ORDER BY tgl_input DESC";
+$hasil = mysqli_query($db, $sql);
+$buku = [];
+while ($data = mysqli_fetch_assoc($hasil)) {
+    $buku[] = $data;
 }
 
 $title = 'Daftar Buku';
@@ -24,12 +35,15 @@ $title = 'Daftar Buku';
             </tr>
         </thead>
         <tbody>
-            <tr>
-                <td>1</td>
-                <td>Si Kancil</td>
-                <td>Dongeng</td>
-                <td><a href="#" class="badge badge-info">Detail</a></td>
-            </tr>
+            <?php $i = 1;
+            foreach ($buku as $b) : ?>
+                <tr>
+                    <td><?= $i++ ?></td>
+                    <td><?= $b['judul'] ?></td>
+                    <td><?= $b['nama_kategori'] ?></td>
+                    <td><a href="#" class="badge badge-info btn-detail-buku">Detail</a></td>
+                </tr>
+            <?php endforeach ?>
         </tbody>
     </table>
 </div>

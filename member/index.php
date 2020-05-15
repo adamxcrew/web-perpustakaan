@@ -10,7 +10,9 @@ if (!isLogin() || !isMember()) {
 
 //Ambil data buku dari tabel buku join dengan kategori
 $sql = "SELECT buku.id, judul, tahun_terbit, kategori.nama_kategori FROM buku
-        JOIN kategori ON id_kategori = kategori.id";
+        JOIN kategori ON id_kategori = kategori.id
+        ORDER BY tgl_input DESC
+        LIMIT 5";
 $hasil = mysqli_query($db, $sql);
 $buku = [];
 while ($data = mysqli_fetch_assoc($hasil)) {
