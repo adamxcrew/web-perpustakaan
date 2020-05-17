@@ -23,6 +23,7 @@ $nama = mysqli_fetch_assoc($result)['nama'];
             <div class="collapse navbar-collapse" id="navigasiMain">
                 <div class="navbar-nav mr-auto">
                     <a class="nav-item nav-link <?= ($title == 'Home' ? 'active' : '') ?>" href="<?= BASE_URL ?>/admin">Home</a>
+                    <a class="nav-item nav-link <?= ($title == 'Input Peminjaman' ? 'active' : '') ?>" href="<?= BASE_URL ?>/admin/input-peminjaman.php">Input Peminjaman</a>
                     <a class="nav-item nav-link <?= ($title == 'Penerbit' ? 'active' : '') ?>" href="<?= BASE_URL ?>/admin/penerbit">Penerbit</a>
                     <a class="nav-item nav-link <?= ($title == 'Kategori' ? 'active' : '') ?>" href="<?= BASE_URL ?>/admin/kategori">Kategori</a>
                     <a class="nav-item nav-link <?= ($title == 'About' ? 'active' : '') ?>" href="<?= BASE_URL ?>/about.php">About</a>
