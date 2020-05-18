@@ -51,10 +51,10 @@ CREATE TABLE pinjaman (
     denda INT
 );
 
--- Table detail transaksi
-CREATE TABLE detail_transaksi (
+-- Table detail pinjaman
+CREATE TABLE detail_pinjaman (
     id_pinjaman INT NOT NULL,
     id_buku INT NOT NULL,
     FOREIGN KEY (id_pinjaman) REFERENCES pinjaman(id_pinjaman),
-    FOREIGN KEY (id_buku) REFERENCES buku(id_buku)
+    FOREIGN KEY (id_buku) REFERENCES buku(id)
 );
