@@ -11,6 +11,7 @@ $nama = mysqli_fetch_assoc($result)['nama'];
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perpustakaan Pintar Ilmu - <?= $title ?></title>
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.17/dist/css/bootstrap-select.min.css">
 </head>
 
 <body>

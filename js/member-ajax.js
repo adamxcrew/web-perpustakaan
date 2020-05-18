@@ -3,7 +3,7 @@ $('.btn-detail-buku').on('click', function () {
     let id = $(this).data('id');
     // console.log(id);
     $.ajax({
-        type: 'post',
+        method: 'post',
         url: 'ambil-buku.php',
         data: {
             id: id
