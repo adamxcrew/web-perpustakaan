@@ -50,7 +50,7 @@ $title = 'Daftar Pinjaman';
                         <td class="text-success">Sudah Dikembalikan</td>
                     <?php endif ?>
                     <td>
-                        <a href="#" class="badge badge-info btn-detail-pinjaman" data-id="<?= $p['id_pinjaman'] ?>" data-toggle="modal" data-target="#detailPinjamanModal">Detail</a>
+                        <a href="#" class="badge badge-info btn-detail-pinjaman" <?php echo $p['tanggal_kembali'] == NULL ? 'data-kembali="false"' : 'data-kembali="true"' ?> data-id="<?= $p['id_pinjaman'] ?>" data-toggle="modal" data-target="#detailPinjamanModal">Detail</a>
                     </td>
                 </tr>
             <?php endforeach; ?>

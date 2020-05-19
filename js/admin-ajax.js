@@ -75,7 +75,12 @@ $('#simpan-pinjaman').on('click', function () {
 
 $('.btn-detail-pinjaman').on('click', function () {
     let id = $(this).data('id');
-    $('#selesaikan-pinjaman').data('id', id);
+    if ($(this).data('kembali') == true) {
+        $('#selesaikan-pinjaman').hide();
+    } else {
+        $('#selesaikan-pinjaman').data('id', id);
+        $('#selesaikan-pinjaman').show();
+    }
     $('#id-pinjaman').html(id);
     $.ajax({
         url: 'peminjaman.php?op=detail',
@@ -100,13 +105,21 @@ $('.btn-detail-pinjaman').on('click', function () {
 $('#selesaikan-pinjaman').on('click', function () {
     let id = $(this).data('id');
     if (confirm('Apakah anda yakin ingin menyelesaikan pinjaman ini?')) {
-        console.log(id);
         $.ajax({
-            url: '',
+            url: 'peminjaman.php?op=selesai',
+            data: {
+                id: id
+            },
             method: 'post',
             dataType: 'json',
             success: function (data) {
-
+                if (data == 'tidak denda') {
+                    alert('Pinjaman berhasil diselesaikan, tidak ada denda');
+                    location.reload();
+                } else {
+                    alert('Pinjaman berhasil diselesaikan, denda Rp ' + data)
+                    location.reload();
+                }
             }
         });
     }

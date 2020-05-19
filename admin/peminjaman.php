@@ -127,6 +127,33 @@ switch ($operasi) {
         echo json_encode([$buku, $pinjaman]);
         break;
 
+    case 'selesai':
+        $id_pinjaman = $_POST['id'];
+        $sql = "SELECT lama_pinjam, tanggal_pinjam FROM pinjaman WHERE id_pinjaman = '$id_pinjaman'";
+        $lama_pinjam = mysqli_fetch_assoc(mysqli_query($db, $sql))['lama_pinjam'];
+        $tanggal_pinjam = strtotime(mysqli_fetch_assoc(mysqli_query($db, $sql))['tanggal_pinjam']);
+        $tanggal_kembali = time();
+        $datediff = $tanggal_kembali - $tanggal_pinjam;
+        $bedahari = round($datediff / (60 * 60 * 24));
+
+        if ($bedahari > $lama_pinjam) {
+            $denda = ($bedahari - $lama_pinjam) * 10000;
+            $tanggal_kembali = date('Y-m-d');
+            $sql = "UPDATE pinjaman
+                    SET tanggal_kembali = '$tanggal_kembali', denda = '$denda'
+                    WHERE id_pinjaman = '$id_pinjaman'";
+            mysqli_query($db, $sql);
+            echo json_encode($denda);
+        } else {
+            $tanggal_kembali = date('Y-m-d');
+            $sql = "UPDATE pinjaman
+                    SET tanggal_kembali = '$tanggal_kembali', denda = 0
+                    WHERE id_pinjaman = '$id_pinjaman'";
+            mysqli_query($db, $sql);
+            echo json_encode('tidak denda');
+        }
+        break;
+
     case 'clear':
         unset($_SESSION['member_pinjam']);
         unset($_SESSION['pinjaman']);
