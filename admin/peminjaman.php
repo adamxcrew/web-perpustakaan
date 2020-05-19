@@ -107,6 +107,26 @@ switch ($operasi) {
         }
         break;
 
+    case 'detail':
+        $id_pinjaman = $_POST['id'];
+        $sql = "SELECT judul FROM buku
+                JOIN detail_pinjaman ON detail_pinjaman.id_buku = buku.id
+                WHERE id_pinjaman = '$id_pinjaman'";
+        $hasil = mysqli_query($db, $sql);
+        $buku = [];
+        while ($data = mysqli_fetch_assoc($hasil)) {
+            $buku[] = $data;
+        }
+
+        $sql = "SELECT tanggal_pinjam, nama, lama_pinjam FROM pinjaman
+                JOIN users ON pinjaman.id_member = users.id
+                WHERE id_pinjaman = '$id_pinjaman'";
+        $hasil = mysqli_query($db, $sql);
+        $pinjaman = mysqli_fetch_assoc($hasil);
+
+        echo json_encode([$buku, $pinjaman]);
+        break;
+
     case 'clear':
         unset($_SESSION['member_pinjam']);
         unset($_SESSION['pinjaman']);

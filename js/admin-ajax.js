@@ -72,3 +72,42 @@ $('#simpan-pinjaman').on('click', function () {
         }
     });
 });
+
+$('.btn-detail-pinjaman').on('click', function () {
+    let id = $(this).data('id');
+    $('#selesaikan-pinjaman').data('id', id);
+    $('#id-pinjaman').html(id);
+    $.ajax({
+        url: 'peminjaman.php?op=detail',
+        data: {
+            id: id
+        },
+        method: 'post',
+        dataType: 'json',
+        success: function (data) {
+            $('#nama-member').html(data[1].nama);
+            $('#lama-pinjam').html(data[1].lama_pinjam + ' hari');
+            let buku = '';
+            $.each(data[0], function (i, val) {
+                buku +=
+                    '<li>' + val.judul + '</li>'
+            });
+            $('#daftar-buku').html(buku);
+        }
+    });
+});
+
+$('#selesaikan-pinjaman').on('click', function () {
+    let id = $(this).data('id');
+    if (confirm('Apakah anda yakin ingin menyelesaikan pinjaman ini?')) {
+        console.log(id);
+        $.ajax({
+            url: '',
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+
+            }
+        });
+    }
+});
