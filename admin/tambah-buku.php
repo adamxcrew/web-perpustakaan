@@ -20,9 +20,10 @@ if (isset($_POST['submit'])) {
     $penulis = htmlspecialchars($_POST['penulis']);
     $isbn = htmlspecialchars($_POST['isbn']);
     $kategori = htmlspecialchars($_POST['kategori']);
+    $tgl_input = date('Y-m-d');
 
     $sql = "INSERT INTO buku VALUES
-    (null, '$judul', $penerbit, '$tahun', '$penulis', '$isbn', $kategori)";
+    (null, '$judul', '$penerbit', '$tahun', '$penulis', '$isbn', '$kategori', '$tgl_input')";
 
     $simpan = mysqli_query($db, $sql);
 
