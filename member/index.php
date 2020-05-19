@@ -8,6 +8,11 @@ if (!isLogin() || !isMember()) {
     header('Location:../login.php');
 }
 
+//Ambil id member
+$username = $_SESSION['login'];
+$sql = "SELECT id FROM users WHERE username ='$username'";
+$id_member = mysqli_fetch_assoc(mysqli_query($db, $sql))['id'];
+
 //Ambil data buku dari tabel buku join dengan kategori
 $sql = "SELECT buku.id, judul, tahun_terbit, kategori.nama_kategori FROM buku
         JOIN kategori ON id_kategori = kategori.id
@@ -19,6 +24,17 @@ while ($data = mysqli_fetch_assoc($hasil)) {
     $buku[] = $data;
 }
 
+//Ambil pinjaman dari db
+$username = $_SESSION['login'];
+$sql = "SELECT id FROM users WHERE username ='$username'";
+$id = mysqli_fetch_assoc(mysqli_query($db, $sql))['id'];
+$sql = "SELECT tanggal_pinjam, lama_pinjam, tanggal_kembali FROM pinjaman 
+        WHERE id_member = '$id'";
+$hasil = mysqli_query($db, $sql);
+$pinjaman = [];
+while ($data = mysqli_fetch_assoc($hasil)) {
+    $pinjaman[] = $data;
+}
 $title = 'Home';
 ?>
 <?php include 'header.php' ?>
@@ -27,8 +43,9 @@ $title = 'Home';
     <hr>
     <div class="row mt-3">
         <div class="col-lg-12">
-            <h5>Selamat datang, <?= $nama ?>!</h5>
-            <p>Mau cari buku apa hari ini? yuk lihat beberapa koleksi buku terbaru kami!</p>
+            <h5 class="mb-0">Selamat datang, <?= $nama ?>!</h5>
+            <small class="m-0">ID Member: <?= $id_member ?></small>
+            <p class="mt-3">Mau cari buku apa hari ini? yuk lihat beberapa koleksi buku terbaru kami!</p>
             <table class="table">
                 <thead class="thead-light">
                     <tr>
@@ -58,19 +75,24 @@ $title = 'Home';
                     <tr>
                         <th>No</th>
                         <th>Tanggal Pinjam</th>
-                        <th>Nama Buku</th>
                         <th>Lama Pinjam</th>
                         <th>Status</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <tr>
-                        <td>1</td>
-                        <td>24 May 2020</td>
-                        <td>Si Kancil</td>
-                        <td>1 Minggu</td>
-                        <td>Belum Dikembalikan</td>
-                    </tr>
+                    <?php $i = 1;
+                    foreach ($pinjaman as $p) : ?>
+                        <tr>
+                            <td><?= $i++ ?></td>
+                            <td><?= date('d M Y', strtotime($p['tanggal_pinjam'])) ?></td>
+                            <td><?= $p['lama_pinjam'] ?> Hari</td>
+                            <?php if ($p['tanggal_kembali'] == NULL) : ?>
+                                <td class="text-danger">Belum Dikembalikan</td>
+                            <?php else : ?>
+                                <td class="text-success">Sudah Dikembalikan</td>
+                            <?php endif ?>
+                        </tr>
+                    <?php endforeach ?>
                 </tbody>
             </table>
         </div>

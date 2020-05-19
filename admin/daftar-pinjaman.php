@@ -10,7 +10,7 @@ if (!isLogin() || !isAdmin()) {
     header("Location:" . BASE_URL . "/login.php");
 }
 
-//Ambil transaksi dari db
+//Ambil pinjaman dari db
 $sql = "SELECT id_pinjaman, nama, tanggal_pinjam, tanggal_kembali FROM pinjaman 
         JOIN users ON pinjaman.id_member = users.id";
 $hasil = mysqli_query($db, $sql);
