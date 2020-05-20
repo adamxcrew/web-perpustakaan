@@ -8,6 +8,7 @@ session_start(); ?>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perpustakaan Pintar Ilmu - About</title>
+    <link rel="icon" href="<?= BASE_URL ?>/img/favicon.png" type="image/png">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/bootstrap.min.css">
 </head>
 

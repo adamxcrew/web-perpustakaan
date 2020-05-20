@@ -254,6 +254,16 @@ header.masthead {
   height: 100%;
 }
 
+header.masthead:before {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, .5);
+}
+
 header.masthead hr {
   margin-top: 30px;
   margin-bottom: 30px;

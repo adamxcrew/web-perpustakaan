@@ -1,3 +1,14 @@
+<?php
+include 'koneksi.php';
+//Ambil data buku dari tabel buku join dengan kategori
+$sql = "SELECT judul, tahun_terbit, kategori.nama_kategori FROM buku
+        JOIN kategori ON id_kategori = kategori.id";
+$hasil = mysqli_query($db, $sql);
+$buku = [];
+while ($data = mysqli_fetch_assoc($hasil)) {
+    $buku[] = $data;
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -8,6 +19,7 @@
     <meta name="author" content="Andika Tedja" />
 
     <title>Perpustakaan Pintar Ilmu - Landing</title>
+    <link rel="icon" href="img/favicon.png" type="image/png">
 
     <!-- Bootstrap core CSS -->
     <link href="css/bootstrap.min.css" rel="stylesheet" />
@@ -21,7 +33,7 @@
 
 <body id="page-top">
     <!-- Navigation -->
-    <nav class="navbar navbar-expand-lg navbar-light fixed-top bg-dark" id="mainNav">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
             <a class="navbar-brand js-scroll-trigger" href="">Perpustakaan Pintar Ilmu</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
@@ -30,7 +42,10 @@
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="navbar-nav ml-auto">
                     <li class="nav-item">
-                        <a href="login.php" class="nav-link">Login</a>
+                        <a href="#buku" class="nav-link js-scroll-trigger">Koleksi Buku</a>
+                    </li>
+                    <li class="nav-item">
+                        <a href="login.php" class="nav-link">Register / Login</a>
                     </li>
                 </ul>
             </div>
@@ -55,12 +70,44 @@
         </div>
     </header>
 
+    <section id="buku" class="bg-light text-center">
+        <div class="container">
+            <h4>Koleksi Buku</h4>
+            <hr>
+            <p>Berikut ini koleksi buku dari Perpustakaan Pintar Ilmu.</p>
+            <table class="table">
+                <thead class="thead-light">
+                    <tr>
+                        <th>No</th>
+                        <th>Judul Buku</th>
+                        <th>Kategori</th>
+                        <th>Tahun Terbit</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <?php $i = 1;
+                    foreach ($buku as $b) : ?>
+                        <tr>
+                            <td><?= $i++ ?></td>
+                            <td><?= $b['judul'] ?></td>
+                            <td><?= $b['nama_kategori'] ?></td>
+                            <td><?= $b['tahun_terbit'] ?></td>
+                        </tr>
+                    <?php endforeach ?>
+                </tbody>
+            </table>
+        </div>
+    </section>
+
     <!-- Bootstrap core JavaScript -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
 
+    <!-- Plugin JavaScript -->
+    <script src="js/jquery.easing.min.js"></script>
+
     <!-- Custom scripts for this template -->
-    <!-- <script src="js/creative.min.js"></script> -->
+    <script src="js/creative.min.js"></script>
 </body>
 
 </html>
