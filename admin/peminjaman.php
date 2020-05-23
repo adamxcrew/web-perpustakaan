@@ -131,10 +131,10 @@ switch ($operasi) {
         $id_pinjaman = $_POST['id'];
         $sql = "SELECT lama_pinjam, tanggal_pinjam FROM pinjaman WHERE id_pinjaman = '$id_pinjaman'";
         $lama_pinjam = mysqli_fetch_assoc(mysqli_query($db, $sql))['lama_pinjam'];
-        $tanggal_pinjam = strtotime(mysqli_fetch_assoc(mysqli_query($db, $sql))['tanggal_pinjam']);
-        $tanggal_kembali = time();
-        $datediff = $tanggal_kembali - $tanggal_pinjam;
-        $bedahari = round($datediff / (60 * 60 * 24));
+        $tanggal_pinjam = mysqli_fetch_assoc(mysqli_query($db, $sql))['tanggal_pinjam'];
+        $tanggal_kembali = date('Y-m-d');
+        $datediff = strtotime($tanggal_kembali) - strtotime($tanggal_pinjam);
+        $bedahari = abs(round($datediff / (60 * 60 * 24)));
 
         if ($bedahari > $lama_pinjam) {
             $denda = ($bedahari - $lama_pinjam) * 10000;
