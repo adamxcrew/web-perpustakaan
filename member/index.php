@@ -82,16 +82,34 @@ $title = 'Home';
                 <tbody>
                     <?php $i = 1;
                     foreach ($pinjaman as $p) : ?>
-                        <tr>
-                            <td><?= $i++ ?></td>
-                            <td><?= date('d M Y', strtotime($p['tanggal_pinjam'])) ?></td>
-                            <td><?= $p['lama_pinjam'] ?> Hari</td>
-                            <?php if ($p['tanggal_kembali'] == NULL) : ?>
-                                <td class="text-danger">Belum Dikembalikan</td>
-                            <?php else : ?>
-                                <td class="text-success">Sudah Dikembalikan</td>
-                            <?php endif ?>
-                        </tr>
+                        <?php
+                        $tgl_skrg = date('Y-m-d');
+                        $datediff = strtotime($tgl_skrg) - strtotime($p['tanggal_pinjam']);
+                        $bedahari = abs(round($datediff / (60 * 60 * 24)));
+
+                        if ($bedahari > $p['lama_pinjam'] && $p['tanggal_kembali'] == NULL) : ?>
+                            <tr class="bg-warning">
+                                <td><?= $i++ ?></td>
+                                <td><?= date('d M Y', strtotime($p['tanggal_pinjam'])) ?></td>
+                                <td><?= $p['lama_pinjam'] ?> Hari</td>
+                                <?php if ($p['tanggal_kembali'] == NULL) : ?>
+                                    <td class="text-danger">Belum Dikembalikan</td>
+                                <?php else : ?>
+                                    <td class="text-success">Sudah Dikembalikan</td>
+                                <?php endif ?>
+                            </tr>
+                        <?php else : ?>
+                            <tr>
+                                <td><?= $i++ ?></td>
+                                <td><?= date('d M Y', strtotime($p['tanggal_pinjam'])) ?></td>
+                                <td><?= $p['lama_pinjam'] ?> Hari</td>
+                                <?php if ($p['tanggal_kembali'] == NULL) : ?>
+                                    <td class="text-danger">Belum Dikembalikan</td>
+                                <?php else : ?>
+                                    <td class="text-success">Sudah Dikembalikan</td>
+                                <?php endif ?>
+                            </tr>
+                        <?php endif; ?>
                     <?php endforeach ?>
                 </tbody>
             </table>
