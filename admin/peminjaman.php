@@ -69,6 +69,13 @@ switch ($operasi) {
         die;
         break;
 
+    case 'ceksesi':
+        if (!isset($_SESSION['pinjaman']) && !isset($_SESSION['member_pinjam'])) {
+            echo json_encode('no_session');
+            die;
+        }
+        break;
+
     case 'simpan':
         if (!isset($_SESSION['pinjaman']) && !isset($_SESSION['member_pinjam'])) {
             echo json_encode('no_session');

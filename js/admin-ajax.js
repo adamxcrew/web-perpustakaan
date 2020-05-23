@@ -58,19 +58,21 @@ $('#cek-member').on('click', function () {
 });
 
 $('#simpan-pinjaman').on('click', function () {
-    $.ajax({
-        url: 'peminjaman.php?op=simpan',
-        method: 'post',
-        dataType: 'json',
-        success: function (data) {
-            if (data == 'no_session') {
-                alert('Silahkan buat sesi peminjaman terlebih dahulu!');
-            } else {
-                alert('Peminjaman baru berhasil disimpan');
-                location.reload();
+    if (confirm('Apakah anda yakin ingin menyimpan pinjaman baru?')) {
+        $.ajax({
+            url: 'peminjaman.php?op=simpan',
+            method: 'post',
+            dataType: 'json',
+            success: function (data) {
+                if (data == 'no_session') {
+                    alert('Silahkan buat sesi peminjaman terlebih dahulu!');
+                } else {
+                    alert('Peminjaman baru berhasil disimpan');
+                    location.reload();
+                }
             }
-        }
-    });
+        });
+    }
 });
 
 $('.btn-detail-pinjaman').on('click', function () {
