@@ -12,7 +12,8 @@ $username = $_SESSION['login'];
 $sql = "SELECT id FROM users WHERE username ='$username'";
 $id = mysqli_fetch_assoc(mysqli_query($db, $sql))['id'];
 $sql = "SELECT id_pinjaman, tanggal_pinjam, lama_pinjam, tanggal_kembali FROM pinjaman 
-        WHERE id_member = '$id'";
+        WHERE id_member = '$id'
+        ORDER BY tanggal_pinjam DESC";
 $hasil = mysqli_query($db, $sql);
 $pinjaman = [];
 while ($data = mysqli_fetch_assoc($hasil)) {

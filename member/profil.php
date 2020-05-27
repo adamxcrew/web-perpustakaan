@@ -65,7 +65,7 @@ $title = 'Profil';
     <small>ID Member: <?= $data['id'] ?></small>
     <hr>
     <div class="row mt-3">
-        <div class="col-6">
+        <div class="col-sm-6">
             <?php if (isset($sukses_profil)) : ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     Profil berhasil diubah!.
@@ -87,7 +87,7 @@ $title = 'Profil';
                 <button class="btn btn-primary" type="submit" name="submit_profil">Edit Profil</button>
             </form>
         </div>
-        <div class="col-6">
+        <div class="col-sm-6">
             <?php if (isset($error_pass_confirm)) : ?>
                 <div class="alert alert-danger alert-dismissible fade show" role="alert">
                     Konfirmasi password tidak sama!.

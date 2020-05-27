@@ -13,6 +13,8 @@ $nama = mysqli_fetch_assoc($result)['nama'];
     <link rel="icon" href="<?= BASE_URL ?>/img/favicon.png" type="image/png">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.17/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.4/css/responsive.bootstrap4.min.css">
 </head>
 
 <body>

@@ -1,2 +1,3 @@
 <?php
-define('BASE_URL', 'http://localhost/perpustakaan');
+
+define('BASE_URL', 'http://localhost/perpustakaan/');

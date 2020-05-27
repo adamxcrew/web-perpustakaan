@@ -12,7 +12,8 @@ if (!isLogin() || !isAdmin()) {
 
 //Ambil pinjaman dari db
 $sql = "SELECT id_pinjaman, nama, tanggal_pinjam, tanggal_kembali, lama_pinjam FROM pinjaman 
-        JOIN users ON pinjaman.id_member = users.id";
+        JOIN users ON pinjaman.id_member = users.id
+        ORDER BY tanggal_pinjam DESC";
 $hasil = mysqli_query($db, $sql);
 $pinjaman = [];
 while ($data = mysqli_fetch_assoc($hasil)) {
@@ -27,7 +28,7 @@ $title = 'Daftar Pinjaman';
 
     <h3 class="mt-5 mb-3 pt-2 text-center">Daftar Pinjaman</h3>
 
-    <table class="table mt-3">
+    <table id="daftar-pinjaman" class="table mt-3 dt-responsive nowrap" style="width:100%">
         <thead class="thead-dark">
             <tr>
                 <th>No</th>

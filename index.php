@@ -29,13 +29,18 @@ while ($data = mysqli_fetch_assoc($hasil)) {
 
     <!-- Custom styles for this template -->
     <link href="css/custom-style.css" rel="stylesheet" />
+
+    <!-- DataTables -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.17/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.4/css/responsive.bootstrap4.min.css">
 </head>
 
 <body id="page-top">
     <!-- Navigation -->
     <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
         <div class="container">
-            <a class="navbar-brand js-scroll-trigger" href="">Perpustakaan Pintar Ilmu</a>
+            <a class="navbar-brand js-scroll-trigger" href="">Perpustakaan</a>
             <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
@@ -75,7 +80,7 @@ while ($data = mysqli_fetch_assoc($hasil)) {
             <h4>Koleksi Buku</h4>
             <hr>
             <p>Berikut ini koleksi buku dari Perpustakaan Pintar Ilmu.</p>
-            <table class="table">
+            <table id="daftar-buku" class="table dt-responsive nowrap" style="width: 100%;">
                 <thead class="thead-light">
                     <tr>
                         <th>No</th>
@@ -99,6 +104,16 @@ while ($data = mysqli_fetch_assoc($hasil)) {
         </div>
     </section>
 
+    <!-- Footer -->
+    <footer class="page-footer font-small bg-dark">
+        <!-- Copyright -->
+        <div class="footer-copyright text-center py-3 text-white">
+            Copyright &copy; 2020<a href=""> Andika Tedja</a>
+        </div>
+        <!-- Copyright -->
+    </footer>
+    <!-- Footer -->
+
     <!-- Bootstrap core JavaScript -->
     <script src="js/jquery.min.js"></script>
     <script src="js/bootstrap.bundle.min.js"></script>
@@ -108,6 +123,15 @@ while ($data = mysqli_fetch_assoc($hasil)) {
 
     <!-- Custom scripts for this template -->
     <script src="js/creative.min.js"></script>
+
+    <!-- DataTables -->
+    <script src="https://cdn.datatables.net/1.10.21/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.10.21/js/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.4/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.2.4/js/responsive.bootstrap4.min.js"></script>
+    <script type="text/javascript">
+        $('#daftar-buku').DataTable();
+    </script>
 </body>
 
 </html>
