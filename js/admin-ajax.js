@@ -75,7 +75,7 @@ $('#simpan-pinjaman').on('click', function () {
     }
 });
 
-$('.btn-detail-pinjaman').on('click', function () {
+$(document).on('click', '.btn-detail-pinjaman', function () {
     let id = $(this).data('id');
     if ($(this).data('kembali') == true) {
         $('#selesaikan-pinjaman').hide();

@@ -1,4 +1,4 @@
-$('.btn-detail-buku').on('click', function () {
+$(document).on('click', '.btn-detail-buku', function () {
     // console.log('OK');
     let id = $(this).data('id');
     // console.log(id);
@@ -19,7 +19,7 @@ $('.btn-detail-buku').on('click', function () {
     });
 });
 
-$('.btn-detail-pinjaman').on('click', function () {
+$(document).on('click', '.btn-detail-pinjaman', function () {
     let id = $(this).data('id');
     $('#id-pinjaman').html(id);
     $.ajax({

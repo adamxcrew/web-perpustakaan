@@ -13,6 +13,9 @@ $nama = mysqli_fetch_assoc($result)['nama'];
     <title>Perpustakaan Pintar Ilmu - <?= $title ?></title>
     <link rel="icon" href="<?= BASE_URL ?>/img/favicon.png" type="image/png">
     <link rel="stylesheet" href="<?= BASE_URL ?>/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.17/dist/css/bootstrap-select.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.4/css/responsive.bootstrap4.min.css">
 </head>
 
 <body>
@@ -28,6 +31,7 @@ $nama = mysqli_fetch_assoc($result)['nama'];
                     <a class="nav-item nav-link <?= ($title == 'Daftar Buku' ? 'active' : '') ?>" href="<?= BASE_URL ?>/member/daftar-buku.php">Daftar Buku</a>
                     <a class="nav-item nav-link <?= ($title == 'Daftar Pinjaman' ? 'active' : '') ?>" href="<?= BASE_URL ?>/member/daftar-pinjaman.php">Pinjaman Buku</a>
                     <a class="nav-item nav-link <?= ($title == 'Kontak' ? 'active' : '') ?>" href="<?= BASE_URL ?>/member/kontak.php">Hubungi Kami</a>
+                    <a class="nav-item nav-link" href="<?= BASE_URL ?>/about.php">About</a>
                 </div>
                 <div class="navbar-nav ml-auto">
                     <li class="nav-item dropdown">

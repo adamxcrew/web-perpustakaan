@@ -8,6 +8,9 @@
 <script src="<?= BASE_URL ?>/js/admin-ajax.js"></script>
 <script type="text/javascript">
     $('#daftar-pinjaman').DataTable();
+    $('#tbl-daftar-buku').DataTable();
+    $('#tbl-list-penerbit').DataTable();
+    $('#tbl-list-kategori').DataTable();
 </script>
 </body>
 

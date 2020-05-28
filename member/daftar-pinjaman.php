@@ -27,7 +27,7 @@ $title = 'Daftar Pinjaman';
     <h3 class="mt-5 pt-2">Daftar Pinjaman Buku</h3>
     <hr>
     <p>Daftar pinjaman kamu, jangan lupa dikembalikan ya supaya tidak terkena denda!</p>
-    <table class="table">
+    <table id="tbl-daftar-pinjaman" class="table dt-responsive nowrap" style="width: 100%;">
         <thead class="thead-light">
             <tr>
                 <th>No</th>

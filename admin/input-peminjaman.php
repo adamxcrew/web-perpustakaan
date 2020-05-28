@@ -46,7 +46,7 @@ $title = 'Input Peminjaman'
             <input type="number" class="form-control" id="id-member" value="<?php echo isset($_SESSION['member_pinjam']) ? $_SESSION['member_pinjam']['id_member'] : '' ?>" name="idmember" required <?php echo isset($_SESSION['member_pinjam']) ? 'disabled' : '' ?>>
         </div>
         <div class="col-sm-4">
-            <button id="cek-member" class="btn btn-info" data-toggle="modal" data-target="#cekMemberModal">Cek Member</button>
+            <button id="cek-member" class="btn btn-info mt-3 mt-sm-0" data-toggle="modal" data-target="#cekMemberModal">Cek Member</button>
         </div>
     </div>
 

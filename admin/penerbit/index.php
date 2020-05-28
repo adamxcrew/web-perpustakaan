@@ -50,7 +50,7 @@ $title = 'Penerbit';
 
     <h3>List Penerbit</h3>
 
-    <table class="table">
+    <table id="tbl-list-penerbit" class="table dt-responsive nowrap" style="width: 100%;">
         <thead class="thead-dark text-center">
             <tr>
                 <th>No</th>

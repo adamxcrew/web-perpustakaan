@@ -25,7 +25,7 @@ $title = 'Daftar Buku';
     <h3 class="mt-5 pt-2">Daftar Buku Perpustakaan</h3>
     <hr>
     <p>Cari dulu disini, kalau ada langsung cus ke perpustakaan!</p>
-    <table class="table">
+    <table id="tbl-daftar-buku" class="table dt-responsive nowrap" style="width: 100%;">
         <thead class="thead-light">
             <tr>
                 <th>No</th>

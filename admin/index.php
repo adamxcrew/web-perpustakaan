@@ -96,7 +96,7 @@ $title = 'Home';
 
     <h3>List Buku</h3>
 
-    <table class="table">
+    <table id="tbl-daftar-buku" class="table dt-responsive nowrap" style="width: 100%;">
         <thead class="thead-dark text-center">
             <tr>
                 <th>No</th>
