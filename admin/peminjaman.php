@@ -16,6 +16,14 @@ switch ($operasi) {
             echo json_encode('x');
             break;
         }
+
+        //Cek member
+        $sql = "SELECT id FROM users WHERE id = '$id_member'";
+        $memberExist = mysqli_num_rows(mysqli_query($db, $sql));
+        if ($memberExist == 0) {
+            echo json_encode('xmember');
+            break;
+        }
         $sql = "SELECT judul FROM buku WHERE id = '$id_buku'";
         $judul = mysqli_fetch_assoc(mysqli_query($db, $sql))['judul'];
         $row_id = md5(serialize($id_buku));

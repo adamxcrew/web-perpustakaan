@@ -2,6 +2,10 @@ $('#tambah-peminjaman').on('click', function () {
     let idmember = $('#id-member').val();
     let buku = $('#buku').val();
     let waktu = $('#lama-pinjam').val();
+    if (buku == "" || waktu == "") {
+        alert('Mohon masukkan buku atau waktu peminjaman terlebih dahulu.');
+        return;
+    }
     $.ajax({
         url: 'peminjaman.php?op=tambah',
         data: {
@@ -16,6 +20,8 @@ $('#tambah-peminjaman').on('click', function () {
                 alert('Buku ini sudah masuk ke sesi peminjaman');
             } else if (data == 'x') {
                 alert('Buku ini sudah dipinjam dan belum dikembalikan, harap dikembalikan dulu');
+            } else if (data == 'xmember') {
+                alert('Member tidak ditemukan, harap cek member terlebih dahulu.');
             } else {
                 let tabel = '';
                 let j = 1;
