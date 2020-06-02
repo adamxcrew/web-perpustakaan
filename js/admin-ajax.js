@@ -100,6 +100,11 @@ $(document).on('click', '.btn-detail-pinjaman', function () {
         success: function (data) {
             $('#nama-member').html(data[1].nama);
             $('#lama-pinjam').html(data[1].lama_pinjam + ' hari');
+            if (data[1].denda != null) {
+                $('#denda').html('Denda : Rp ' + data[1].denda);
+            } else {
+                $('#denda').html('Denda : Rp 0');
+            }
             let buku = '';
             $.each(data[0], function (i, val) {
                 buku +=

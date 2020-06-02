@@ -95,6 +95,7 @@ $title = 'Daftar Pinjaman';
                 <h5>ID Pinjaman : <span id="id-pinjaman"></span></h5>
                 <p id="nama-member"></p>
                 <p id="lama-pinjam"></p>
+                <p id="denda"></p>
                 <ol id="daftar-buku">
 
                 </ol>

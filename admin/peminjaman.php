@@ -133,7 +133,7 @@ switch ($operasi) {
             $buku[] = $data;
         }
 
-        $sql = "SELECT tanggal_pinjam, nama, lama_pinjam FROM pinjaman
+        $sql = "SELECT tanggal_pinjam, nama, lama_pinjam, denda FROM pinjaman
                 JOIN users ON pinjaman.id_member = users.id
                 WHERE id_pinjaman = '$id_pinjaman'";
         $hasil = mysqli_query($db, $sql);
