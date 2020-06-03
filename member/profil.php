@@ -15,12 +15,19 @@ if (isset($_POST['submit_profil'])) {
 
     $new_username = htmlspecialchars($_POST['username']);
     $new_nama = htmlspecialchars($_POST['nama']);
-    $sql = "UPDATE users 
+    //Cek apakah username sudah ada
+    $sql = "SELECT username FROM users WHERE username = '$new_username'";
+    $db_username = mysqli_num_rows(mysqli_query($db, $sql));
+    if ($db_username > 0) {
+        $username_exist = true;
+    } else {
+        $sql = "UPDATE users 
             SET username = '$new_username', nama = '$new_nama'
             WHERE id = '$id'";
-    mysqli_query($db, $sql);
-    $_SESSION['login'] = $new_username;
-    $sukses_profil = true;
+        mysqli_query($db, $sql);
+        $_SESSION['login'] = $new_username;
+        $sukses_profil = true;
+    }
 }
 
 if (isset($_POST['submit_password'])) {
@@ -69,6 +76,14 @@ $title = 'Profil';
             <?php if (isset($sukses_profil)) : ?>
                 <div class="alert alert-success alert-dismissible fade show" role="alert">
                     Profil berhasil diubah!.
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+            <?php endif ?>
+            <?php if (isset($username_exist)) : ?>
+                <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                    Username sudah digunakan!.
                     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
