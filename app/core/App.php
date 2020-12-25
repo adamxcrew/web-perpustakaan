@@ -15,8 +15,8 @@ class App
         //home adalah controller, index adalah method, 1 dan 2 adalah parameter
         //Karena url berupa array yang sudah dipecah, jadi index ke 0 adalah controller
         if ($url != NULL) {
-            if (file_exists('app/controllers/' . $url[0] . '.php') && $url != NULL) {
-                $this->controller = $url[0];
+            if (file_exists('app/controllers/' . ucfirst($url[0]) . '.php') && $url != NULL) {
+                $this->controller = ucfirst($url[0]);
                 unset($url[0]);
             }
         }
