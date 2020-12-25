@@ -1,3 +1,4 @@
+const base_url = $('meta[name="base_url"]').attr('content');
 $('#tambah-peminjaman').on('click', function () {
     let idmember = $('#id-member').val();
     let buku = $('#buku').val();
@@ -7,7 +8,7 @@ $('#tambah-peminjaman').on('click', function () {
         return;
     }
     $.ajax({
-        url: 'peminjaman.php?op=tambah',
+        url: base_url + '/peminjaman/tambah',
         data: {
             idmember: idmember,
             buku: buku,
@@ -30,7 +31,7 @@ $('#tambah-peminjaman').on('click', function () {
                         '<tr>' +
                         '<td>' + j++ + '</td>' +
                         '<td>' + val.judul + '</td>' +
-                        '<td><a href="peminjaman.php?op=hapus&row_id=' + val.row_id + '" class="badge badge-danger btn-hapus">Hapus</a></td>' +
+                        '<td><a href="' + base_url + '/peminjaman/hapus/' + val.row_id + '" class="badge badge-danger btn-hapus">Hapus</a></td>' +
                         '</tr>'
                 });
                 $('#tabel-ajax').html(tabel);
@@ -45,7 +46,7 @@ $('#tambah-peminjaman').on('click', function () {
 $('#cek-member').on('click', function () {
     let idmember = $('#id-member').val();
     $.ajax({
-        url: 'peminjaman.php?op=cekmember',
+        url: base_url + '/peminjaman/cekmember',
         data: {
             idmember: idmember
         },
@@ -66,7 +67,7 @@ $('#cek-member').on('click', function () {
 $('#simpan-pinjaman').on('click', function () {
     if (confirm('Apakah anda yakin ingin menyimpan pinjaman baru?')) {
         $.ajax({
-            url: 'peminjaman.php?op=simpan',
+            url: base_url + '/peminjaman/simpan',
             method: 'post',
             dataType: 'json',
             success: function (data) {
@@ -91,7 +92,7 @@ $(document).on('click', '.btn-detail-pinjaman', function () {
     }
     $('#id-pinjaman').html(id);
     $.ajax({
-        url: 'peminjaman.php?op=detail',
+        url: base_url + '/peminjaman/detail',
         data: {
             id: id
         },
@@ -119,7 +120,7 @@ $('#selesaikan-pinjaman').on('click', function () {
     let id = $(this).data('id');
     if (confirm('Apakah anda yakin ingin menyelesaikan pinjaman ini?')) {
         $.ajax({
-            url: 'peminjaman.php?op=selesai',
+            url: base_url + '/peminjaman/selesai',
             data: {
                 id: id
             },

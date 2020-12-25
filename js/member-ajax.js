@@ -1,10 +1,11 @@
+const base_url = $('meta[name="base_url"]').attr('content');
 $(document).on('click', '.btn-detail-buku', function () {
     // console.log('OK');
     let id = $(this).data('id');
     // console.log(id);
     $.ajax({
         method: 'post',
-        url: 'ambil-buku.php',
+        url: base_url + '/member/ambil-buku',
         data: {
             id: id
         },
@@ -23,7 +24,7 @@ $(document).on('click', '.btn-detail-pinjaman', function () {
     let id = $(this).data('id');
     $('#id-pinjaman').html(id);
     $.ajax({
-        url: 'ambil-pinjaman.php',
+        url: base_url + '/member/ambil-pinjaman',
         data: {
             id: id
         },
