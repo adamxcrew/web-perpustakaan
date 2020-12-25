@@ -4,9 +4,9 @@ Sebuah project mata kuliah pemrograman web
 
 ## Instalasi
 
-Edit BASE_URL di config.php
+Edit BASE_URL di app/config.php
 
-Edit konfigurasi database di koneksi.php
+Edit konfigurasi database di app/koneksi.php
 
 File database terdapat pada perpustakaan.sql
 
