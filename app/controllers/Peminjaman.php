@@ -20,6 +20,10 @@ class Peminjaman extends Controller {
         $this->bukuModel = $this->model('Buku_model');
     }
 
+    public function index() {
+        header('Location: ' . BASEURL . '/admin');
+    }
+
     public function tambah() {
         $id_member = $_POST['idmember'];
         $id_buku = $_POST['buku'];

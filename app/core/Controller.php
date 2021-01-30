@@ -1,7 +1,8 @@
 <?php
 
-class Controller
+abstract class Controller
 {
+    abstract public function index();
     public function view($view, $data = [])
     {
         require_once 'app/views/' . $view . '.php';
