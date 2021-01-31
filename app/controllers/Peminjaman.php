@@ -109,6 +109,7 @@ class Peminjaman extends Controller {
     public function simpan() {
         if (!isset($_SESSION['pinjaman']) && !isset($_SESSION['member_pinjam'])) {
             echo json_encode('no_session');
+            die;
         }
 
         //Ambil session
