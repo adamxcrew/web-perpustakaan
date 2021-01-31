@@ -7,38 +7,122 @@
     <meta name="base_url" content="<?= BASEURL ?>">
     <title>Perpustakaan Pintar Ilmu - <?= $data['title'] ?></title>
     <link rel="icon" href="<?= BASEURL ?>/img/favicon.png" type="image/png">
-    <link rel="stylesheet" href="<?= BASEURL ?>/css/bootstrap.min.css">
+    <!-- Custom styles for this template-->
+    <link href="<?= BASEURL ?>/css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?= BASEURL ?>/vendor/fontawesome/css/all.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-select@1.13.17/dist/css/bootstrap-select.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/1.10.21/css/dataTables.bootstrap4.min.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.2.4/css/responsive.bootstrap4.min.css">
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
-        <div class="container">
-            <a class="navbar-brand" href="">Perpustakaan Pintar Ilmu</a>
-            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigasiMain" aria-controls="navigasiMain" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="navigasiMain">
-                <div class="navbar-nav mr-auto">
-                    <a class="nav-item nav-link <?= ($data['title'] == 'Home' ? 'active' : '') ?>" href="<?= BASEURL ?>/member">Home</a>
-                    <a class="nav-item nav-link <?= ($data['title'] == 'Daftar Buku' ? 'active' : '') ?>" href="<?= BASEURL ?>/member/daftar-buku">Daftar Buku</a>
-                    <a class="nav-item nav-link <?= ($data['title'] == 'Daftar Pinjaman' ? 'active' : '') ?>" href="<?= BASEURL ?>/member/daftar-pinjaman">Pinjaman Buku</a>
-                    <a class="nav-item nav-link <?= ($data['title'] == 'Kontak' ? 'active' : '') ?>" href="<?= BASEURL ?>/member/kontak">Hubungi Kami</a>
-                    <a class="nav-item nav-link <?= ($data['title'] == 'About' ? 'active' : '') ?>" href="<?= BASEURL ?>/member/about">About</a>
+<!-- Page Wrapper -->
+<div id="wrapper">
+        <!-- Sidebar -->
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+
+            <!-- Sidebar - Brand -->
+            <a class="sidebar-brand d-flex align-items-center justify-content-center" href="">
+                <div class="sidebar-brand-icon">
+                    <i class="fas fa-book-reader"></i>
                 </div>
-                <div class="navbar-nav ml-auto">
-                    <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                            <?= $data['nama'] ?>
-                        </a>
-                        <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                            <a class="dropdown-item" href="<?= BASEURL ?>/member/profil">Profil</a>
-                            <a class="dropdown-item" onclick="return confirm('Apakah anda yakin ingin keluar?')" href="<?= BASEURL ?>/member/logout">Logout</a>
-                        </div>
-                    </li>
-                </div>
+                <div class="sidebar-brand-text mx-3">Perpustakaan Pintar Ilmu</div>
+            </a>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider my-0">
+
+            <li class="nav-item <?= ($data['title'] == 'Home' ? 'active' : '') ?>">
+                <a class="nav-link" href="<?= BASEURL ?>/member">
+                    <i class="fas fa-tachometer-alt"></i>
+                    <span>Dashboard</span>
+                </a>
+            </li>
+            <li class="nav-item <?= ($data['title'] == 'Daftar Buku' ? 'active' : '') ?>">
+                <a class="nav-link" href="<?= BASEURL ?>/member/daftar-buku">
+                    <i class="fas fa-book"></i>
+                    <span>Daftar Buku</span>
+                </a>
+            </li>
+            <li class="nav-item <?= ($data['title'] == 'Daftar Pinjaman' ? 'active' : '') ?>">
+                <a class="nav-link" href="<?= BASEURL ?>/member/daftar-pinjaman">
+                    <i class="fas fa-list"></i>
+                    <span>Daftar Pinjaman</span>
+                </a>
+            </li>
+            <li class="nav-item <?= ($data['title'] == 'Kontak' ? 'active' : '') ?>">
+                <a class="nav-link" href="<?= BASEURL ?>/member/kontak">
+                    <i class="fas fa-phone-square"></i>
+                    <span>Kontak</span>
+                </a>
+            </li>
+            <li class="nav-item <?= ($data['title'] == 'Profil' ? 'active' : '') ?>">
+                <a class="nav-link" href="<?= BASEURL ?>/member/profil">
+                    <i class="fas fa-user"></i>
+                    <span>Profil</span>
+                </a>
+            </li>
+            <li class="nav-item <?= ($data['title'] == 'About' ? 'active' : '') ?>">
+                <a class="nav-link" href="<?= BASEURL ?>/member/about">
+                    <i class="fas fa-info-circle"></i>
+                    <span>About</span>
+                </a>
+            </li>
+
+            <!-- Divider -->
+            <hr class="sidebar-divider d-none d-md-block">
+
+            <!-- Sidebar Toggler (Sidebar) -->
+            <div class="text-center d-none d-md-inline">
+                <button class="rounded-circle border-0" id="sidebarToggle"></button>
             </div>
-        </div>
-    </nav>
+
+        </ul>
+        <!-- End of Sidebar -->
+
+        <!-- Content Wrapper -->
+        <div id="content-wrapper" class="d-flex flex-column">
+
+            <!-- Main Content -->
+            <div id="content">
+
+                <!-- Topbar -->
+                <nav class="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow">
+
+                    <!-- Sidebar Toggle (Topbar) -->
+                    <button id="sidebarToggleTop" class="btn btn-link d-md-none rounded-circle mr-3">
+                        <i class="fa fa-bars"></i>
+                    </button>
+
+                    <!-- Topbar Navbar -->
+                    <ul class="navbar-nav ml-auto">
+
+                        <!-- Nav Item - User Information -->
+                        <li class="nav-item dropdown no-arrow">
+                            <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button"
+                                data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <span class="mr-2 d-none d-lg-inline text-gray-600 small"><?= $data['nama'] ?></span>
+                                <img class="img-profile rounded-circle"
+                                    src="https://source.unsplash.com/QAB-WJcbgJk/60x60">
+                            </a>
+                            <!-- Dropdown - User Information -->
+                            <div class="dropdown-menu dropdown-menu-right shadow animated--grow-in"
+                                aria-labelledby="userDropdown">
+                                <a class="dropdown-item" href="<?= BASEURL ?>/member/profil">
+                                    <i class="fas fa-user fa-sm mr-2 text-gray-400"></i>
+                                    Profil
+                                </a>
+                                <a class="dropdown-item" href="<?= BASEURL ?>/member/logout" onclick="return confirm('Apakah anda yakin ingin keluar?')">
+                                    <i class="fas fa-sign-out-alt fa-sm mr-2 text-gray-400"></i>
+                                    Logout
+                                </a>
+                            </div>
+                        </li>
+
+                    </ul>
+
+                </nav>
+                <!-- End of Topbar -->
+
+                <!-- Begin Page Content -->
+                <div class="container-fluid">

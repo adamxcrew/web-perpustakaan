@@ -1,3 +1,21 @@
+</div>
+<!-- /.container-fluid -->
+
+</div>
+<!-- End of Main Content -->
+<!-- Footer -->
+<footer class="sticky-footer bg-white">
+    <div class="container my-auto">
+        <div class="copyright text-center my-auto">
+            <span>Copyright &copy; Andika Tedja 2021</span>
+        </div>
+    </div>
+</footer>
+<!-- End of Footer -->
+</div>
+<!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
 <script src="<?= BASEURL ?>/js/jquery.min.js"></script>
 <script src="<?= BASEURL ?>/js/bootstrap.min.js"></script>
 <script src="<?= BASEURL ?>/js/member-ajax.js"></script>
@@ -9,6 +27,8 @@
     $('#tbl-daftar-pinjaman').DataTable();
     $('#tbl-daftar-buku').DataTable();
 </script>
+<!-- Custom scripts for all pages-->
+<script src="<?= BASEURL ?>/js/sb-admin-2.min.js"></script>
 </body>
 
 </html>
