@@ -8,7 +8,7 @@
     <meta name="author" content="Andika Tedja" />
 
     <title>Perpustakaan Pintar Ilmu - Landing</title>
-    <link rel="icon" href="<?= BASEURL ?>/img/favicon.png" type="image/png">
+    <link rel="icon" href="<?= BASEURL ?>/favicon.ico" type="image/png">
 
     <!-- Bootstrap core CSS -->
     <link href="<?= BASEURL ?>/css/bootstrap.min.css" rel="stylesheet" />

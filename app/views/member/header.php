@@ -6,7 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base_url" content="<?= BASEURL ?>">
     <title>Perpustakaan Pintar Ilmu - <?= $data['title'] ?></title>
-    <link rel="icon" href="<?= BASEURL ?>/img/favicon.png" type="image/png">
+    <link rel="icon" href="<?= BASEURL ?>/favicon.ico" type="image/png">
     <!-- Custom styles for this template-->
     <link href="<?= BASEURL ?>/css/sb-admin-2.min.css" rel="stylesheet">
     <link href="<?= BASEURL ?>/vendor/fontawesome/css/all.min.css" rel="stylesheet">
