@@ -1,17 +1,19 @@
 # Aplikasi Perpustakaan Sederhana
 
 Sebuah project mata kuliah pemrograman web.  
-Dapat digunakan untuk tugas atau project yang memerlukan prinsip mvc dan oop 😉  
+Dapat digunakan untuk tugas atau project yang memerlukan prinsip mvc, oop dan penggunaan package 😉  
 
 ## Instalasi
 
-Edit BASEURL dan Database di app/config/config.php  
-File database terdapat pada perpustakaan.sql
+1. Copy kemudian rename .env.example menjadi .env  
+2. Edit BASEURL dan Database di .env  
+3. Jalankan `composer install`
 
 ## Demo Website
 
 Anda dapat melihat demo website disini : [Demo Website Perpustakaan](https://greshan.000webhostapp.com/perpustakaan)
 
-Admin : admin, admin123
+Admin : admin, admin123  
+Anggota : Boleh daftar sendiri  
 
-Anggota : Boleh daftar sendiri
+File database terdapat pada perpustakaan.sql

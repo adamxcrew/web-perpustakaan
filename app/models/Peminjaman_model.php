@@ -62,7 +62,7 @@ class Peminjaman_model {
     }
 
     public function getDetailPinjaman($id_pinjaman) {
-        $sql = "SELECT tanggal_pinjam, nama, lama_pinjam, denda FROM pinjaman
+        $sql = "SELECT tanggal_pinjam, tanggal_kembali, nama, lama_pinjam, denda FROM pinjaman
         JOIN users ON pinjaman.id_member = users.id
         WHERE id_pinjaman = '$id_pinjaman'";
         $this->db->query($sql);
