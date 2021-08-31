@@ -11,7 +11,7 @@ Dapat digunakan untuk tugas atau project yang memerlukan prinsip mvc, oop dan pe
 
 ## Demo Website
 
-Anda dapat melihat demo website disini : [Demo Website Perpustakaan](https://greshan.000webhostapp.com/perpustakaan)
+Anda dapat melihat demo website disini : [Demo Website Perpustakaan](https://perpustakaan-48.herokuapp.com/)
 
 Admin : admin, admin123  
 Anggota : Boleh daftar sendiri  
