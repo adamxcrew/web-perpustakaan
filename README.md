@@ -6,7 +6,7 @@ Dapat digunakan untuk tugas atau project yang memerlukan prinsip mvc, oop dan pe
 ## Instalasi
 
 1. Copy kemudian rename .env.example menjadi .env  
-2. Edit BASEURL dan Database di .env  
+2. Edit APP_NAME, BASEURL, dan Database di .env  
 3. Jalankan `composer install`
 
 ## Demo Website

@@ -1,5 +1,6 @@
 <?php
 
+define('APP_NAME', $_ENV['APP_NAME']);
 define('BASEURL', $_ENV['BASEURL']);
 
 //Database

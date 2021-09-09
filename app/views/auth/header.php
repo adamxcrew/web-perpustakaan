@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perpustakaan Pintar Ilmu - <?= $data['judul'] ?>/</title>
+    <title><?= APP_NAME ?> - <?= $data['judul'] ?>/</title>
     <link rel="icon" href="<?= BASEURL ?>/favicon.ico" type="image/png">
     <!-- Custom fonts for this template-->
     <script src="https://kit.fontawesome.com/386a70e6e1.js" crossorigin="anonymous" defer></script>

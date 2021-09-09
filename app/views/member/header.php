@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="base_url" content="<?= BASEURL ?>">
-    <title>Perpustakaan Pintar Ilmu - <?= $data['title'] ?></title>
+    <title><?= APP_NAME ?> - <?= $data['title'] ?></title>
     <link rel="icon" href="<?= BASEURL ?>/favicon.ico" type="image/png">
     <!-- Custom styles for this template-->
     <link href="<?= BASEURL ?>/css/sb-admin-2.min.css" rel="stylesheet">
@@ -26,7 +26,7 @@
                 <div class="sidebar-brand-icon">
                     <i class="fas fa-book-reader"></i>
                 </div>
-                <div class="sidebar-brand-text mx-3">Perpustakaan Pintar Ilmu</div>
+                <div class="sidebar-brand-text mx-3"><?= APP_NAME ?></div>
             </a>
 
             <!-- Divider -->

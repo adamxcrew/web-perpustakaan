@@ -4,10 +4,10 @@
 <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
-    <meta name="description" content="Perpustakaan pintar ilmu" />
+    <meta name="description" content="Aplikasi sederhana pengelolaan perpustakaan" />
     <meta name="author" content="Andika Tedja" />
 
-    <title>Perpustakaan Pintar Ilmu - Landing</title>
+    <title><?= APP_NAME ?> - Landing</title>
     <link rel="icon" href="<?= BASEURL ?>/favicon.ico" type="image/png">
 
     <!-- Bootstrap core CSS -->
@@ -51,7 +51,7 @@
             <div class="row">
                 <div class="col-lg-10 mx-auto">
                     <h2>
-                        Selamat datang di Perpustakaan Pintar Ilmu!
+                        Selamat datang di <?= APP_NAME ?>!
                     </h2>
                     <hr />
                 </div>
@@ -68,7 +68,7 @@
         <div class="container">
             <h4>Koleksi Buku</h4>
             <hr>
-            <p>Berikut ini koleksi buku dari Perpustakaan Pintar Ilmu.</p>
+            <p>Berikut ini koleksi buku dari <?= APP_NAME ?>.</p>
             <table id="daftar-buku" class="table dt-responsive nowrap" style="width: 100%;">
                 <thead class="thead-light">
                     <tr>
