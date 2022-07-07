@@ -1,15 +1,18 @@
 <?php
 
-class Member extends Controller {
+class Member extends Controller
+{
 
     private $peminjamanModel;
     private $bukuModel;
     private $userModel;
+    private $payload;
 
     function __construct()
     {
-        if (isset($_SESSION['user']['role'])) {
-            if ($_SESSION['user']['role'] != 2) {
+        if (SessionManager::checkSession()) {
+            $this->payload = SessionManager::getCurrentSession();
+            if ($this->payload->role != 2) {
                 header('Location: ' . BASEURL . '/login');
             }
         } else {
@@ -21,11 +24,12 @@ class Member extends Controller {
         $this->userModel = $this->model('User_model');
     }
 
-    public function index() {
+    public function index()
+    {
         $data['title'] = 'Home';
-        $data['id_member']= $_SESSION['user']['id'];
-        $data['nama'] = $_SESSION['user']['nama'];
-        $data['pinjaman'] = $this->peminjamanModel->getPinjamanMember($_SESSION['user']['id']);
+        $data['id_member'] = $this->payload->id;
+        $data['nama'] = $this->payload->nama;
+        $data['pinjaman'] = $this->peminjamanModel->getPinjamanMember($this->payload->id);
         $data['buku'] = $this->bukuModel->getAllBuku();
 
         $this->view('member/header', $data);
@@ -33,9 +37,10 @@ class Member extends Controller {
         $this->view('member/footer');
     }
 
-    public function daftar_buku() {
+    public function daftar_buku()
+    {
         $data['title'] = 'Daftar Buku';
-        $data['nama'] = $_SESSION['user']['nama'];
+        $data['nama'] = $this->payload->nama;
         $data['buku'] = $this->bukuModel->getAllBuku();
 
         $this->view('member/header', $data);
@@ -43,21 +48,24 @@ class Member extends Controller {
         $this->view('member/footer');
     }
 
-    public function ambil_buku() {
+    public function ambil_buku()
+    {
         echo json_encode($this->bukuModel->getDetailBuku($_POST['id']));
     }
 
-    public function daftar_pinjaman() {
+    public function daftar_pinjaman()
+    {
         $data['title'] = 'Daftar Pinjaman';
-        $data['nama'] = $_SESSION['user']['nama'];
-        $data['pinjaman'] = $this->peminjamanModel->getPinjamanMember($_SESSION['user']['id']);
+        $data['nama'] = $this->payload->nama;
+        $data['pinjaman'] = $this->peminjamanModel->getPinjamanMember($this->payload->id);
 
         $this->view('member/header', $data);
         $this->view('member/daftar-pinjaman', $data);
         $this->view('member/footer');
     }
 
-    public function ambil_pinjaman() {
+    public function ambil_pinjaman()
+    {
         $id_pinjaman = $_POST['id'];
 
         $buku = $this->peminjamanModel->getPinjamanBuku($id_pinjaman);
@@ -66,58 +74,69 @@ class Member extends Controller {
         echo json_encode([$buku, $pinjaman]);
     }
 
-    public function kontak() {
+    public function kontak()
+    {
         $data['title'] = 'Kontak';
-        $data['nama'] = $_SESSION['user']['nama'];
+        $data['nama'] = $this->payload->nama;
 
         $this->view('member/header', $data);
         $this->view('member/kontak');
         $this->view('member/footer');
     }
 
-    public function about() {
+    public function about()
+    {
         $data['title'] = 'About';
-        $data['nama'] = $_SESSION['user']['nama'];
+        $data['nama'] = $this->payload->nama;
 
         $this->view('member/header', $data);
         $this->view('about/index');
         $this->view('member/footer');
     }
 
-    public function profil() {
+    public function profil()
+    {
         $data['title'] = 'Profil';
-        $data['nama'] = $_SESSION['user']['nama'];
-        $data['id_member']= $_SESSION['user']['id'];
-        $data['username']= $_SESSION['user']['username'];
+        $data['nama'] = $this->payload->nama;
+        $data['id_member'] = $this->payload->id;
+        $data['username'] = $this->payload->username;
 
         $this->view('member/header', $data);
         $this->view('member/profil', $data);
         $this->view('member/footer');
     }
 
-    public function edit_profil() {
+    public function edit_profil()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             header('Location: ' . BASEURL . '/member/profil');
         }
 
-        $data = $this->userModel->updateUser($_SESSION['user']['id'], $_SESSION['user']['username'], $_POST);
+        $data = $this->userModel->updateUser($this->payload->id, $this->payload->username, $_POST);
         if ($data == 0) {
             Flasher::setFlash('Username sudah digunakan', 'danger');
             header('Location: ' . BASEURL . '/member/profil');
         } else {
-            $_SESSION['user']['username'] = $data['new_username'];
-            $_SESSION['user']['nama'] = $data['new_nama'];
+            $new_payload = [
+                'id' => $this->payload->id,
+                'username' => $data['new_username'],
+                'nama' => $data['new_nama'],
+                'role' => $this->payload->role
+            ];
+            $new_jwt = SessionManager::makeJwt($new_payload);
+            setcookie('PPI-Login', $new_jwt, time() + (60 * 60 * 24 * 30), '/', '', false, true);
             Flasher::setFlash('Profil berhasil diubah', 'success');
             header('Location: ' . BASEURL . '/member/profil');
         }
     }
 
-    public function edit_password() {
+    public function edit_password()
+    {
         $current_password = $_POST['current_password'];
         $new_password = $_POST['new_password'];
         $new_password_confirmation = $_POST['new_password_confirmation'];
 
-        $data = $this->userModel->getUserByID($_SESSION['user']['id']);
+        $data = $this->userModel->getUserByID($this->payload->id);
 
         //Cek apakah konfirmasi password sama
         if ($new_password != $new_password_confirmation) {
@@ -128,16 +147,18 @@ class Member extends Controller {
                 Flasher::setFlash('Password lama salah.', 'danger');
                 header('Location: ' . BASEURL . '/member/profil');
             } else {
-                $this->userModel->updatePassword($_SESSION['user']['id'], $new_password);
+                $this->userModel->updatePassword($this->payload->id, $new_password);
                 Flasher::setFlash('Password berhasil diubah', 'success');
                 header('Location: ' . BASEURL . '/member/profil');
             }
         }
     }
 
-    public function logout() {
+    public function logout()
+    {
         session_unset();
         session_destroy();
+        setcookie('PPI-Login', '', time() - 3600 * 24 * 30, '/');
         header('Location: ' . BASEURL . '/login');
     }
 }

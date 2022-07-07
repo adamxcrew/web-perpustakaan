@@ -1,13 +1,15 @@
 <?php
 
-class Login extends Controller {
+class Login extends Controller
+{
 
     private $userModel;
 
     function __construct()
     {
-        if (isset($_SESSION['user']['role'])) {
-            if ($_SESSION['user']['role'] == 1) {
+        if (SessionManager::checkSession()) {
+            $payload = SessionManager::getCurrentSession();
+            if ($payload->role == 1) {
                 header('Location: ' . BASEURL . '/admin');
             } else {
                 header('Location: ' . BASEURL . '/member');
@@ -17,14 +19,16 @@ class Login extends Controller {
         $this->userModel = $this->model('User_model');
     }
 
-    public function index() {
+    public function index()
+    {
         $data['judul'] = 'Login';
         $this->view('auth/header', $data);
         $this->view('auth/login', $data);
         $this->view('auth/footer');
     }
 
-    public function auth() {
+    public function auth()
+    {
         if ($_SERVER['REQUEST_METHOD'] == 'GET') {
             header('Location: ' . BASEURL . '/login');
         }
@@ -40,13 +44,16 @@ class Login extends Controller {
         }
 
         if (password_verify($password, $dbUser['password'])) {
-            $_SESSION['user'] = [
+            $payload = [
                 'id' => $dbUser['id'],
                 'username' => $username,
                 'nama' => $dbUser['nama'],
                 'role' => $dbUser['role']
             ];
-            if ($_SESSION['user']['role'] == 1) {
+            $jwt = SessionManager::makeJwt($payload);
+            setcookie('PPI-Login', $jwt, time() + (60 * 60 * 24 * 30), '/', '', false, true);
+
+            if ($dbUser['role'] == 1) {
                 header('Location: ' . BASEURL . '/admin');
             } else {
                 header('Location: ' . BASEURL . '/member');

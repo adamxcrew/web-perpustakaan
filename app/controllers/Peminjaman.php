@@ -1,6 +1,7 @@
 <?php
 
-class Peminjaman extends Controller {
+class Peminjaman extends Controller
+{
 
     private $peminjamanModel;
     private $userModel;
@@ -8,8 +9,9 @@ class Peminjaman extends Controller {
 
     function __construct()
     {
-        if (isset($_SESSION['user']['role'])) {
-            if ($_SESSION['user']['role'] != 1) {
+        if (SessionManager::checkSession()) {
+            $payload = SessionManager::getCurrentSession();
+            if ($payload->role != 1) {
                 header('Location: ' . BASEURL . '/login');
             }
         } else {
@@ -20,11 +22,13 @@ class Peminjaman extends Controller {
         $this->bukuModel = $this->model('Buku_model');
     }
 
-    public function index() {
+    public function index()
+    {
         header('Location: ' . BASEURL . '/admin');
     }
 
-    public function tambah() {
+    public function tambah()
+    {
         $id_member = $_POST['idmember'];
         $id_buku = $_POST['buku'];
 
@@ -77,7 +81,8 @@ class Peminjaman extends Controller {
         // var_dump($_SESSION['pinjaman']);
     }
 
-    public function hapus($row_id) {
+    public function hapus($row_id)
+    {
         // $newPinjaman = $_SESSION['pinjaman'];
         // unset($newPinjaman[$row_id]);
         unset($_SESSION['pinjaman'][$row_id]);
@@ -91,7 +96,8 @@ class Peminjaman extends Controller {
         header('Location: ' . BASEURL . '/admin/input-peminjaman');
     }
 
-    public function cekmember() {
+    public function cekmember()
+    {
         $adamember = $this->userModel->checkUserByID($_POST['idmember']);
         if ($adamember == 0) {
             echo json_encode('tidak ditemukan');
@@ -100,13 +106,15 @@ class Peminjaman extends Controller {
         }
     }
 
-    public function ceksesi() {
+    public function ceksesi()
+    {
         if (!isset($_SESSION['pinjaman']) && !isset($_SESSION['member_pinjam'])) {
             echo json_encode('no_session');
         }
     }
 
-    public function simpan() {
+    public function simpan()
+    {
         if (!isset($_SESSION['pinjaman']) && !isset($_SESSION['member_pinjam'])) {
             echo json_encode('no_session');
             die;
@@ -124,7 +132,8 @@ class Peminjaman extends Controller {
         echo json_encode('OK');
     }
 
-    public function detail() {
+    public function detail()
+    {
         $id_pinjaman = $_POST['id'];
 
         $buku = $this->peminjamanModel->getPinjamanBuku($id_pinjaman);
@@ -133,7 +142,8 @@ class Peminjaman extends Controller {
         echo json_encode([$buku, $pinjaman]);
     }
 
-    public function selesai() {
+    public function selesai()
+    {
         $id_pinjaman = $_POST['id'];
         $waktu = $this->peminjamanModel->getWaktuPinjaman($id_pinjaman);
         $lama_pinjam = $waktu['lama_pinjam'];
