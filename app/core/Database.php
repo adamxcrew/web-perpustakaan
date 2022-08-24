@@ -56,6 +56,33 @@ class Database
         $this->stmt->bindValue($param, $value, $type);
     }
 
+    /**
+     * Bind multiple parameters
+     */
+    public function binds($paramValue)
+    {
+        foreach ($paramValue as $param => $value) {
+            $type = null;
+            switch (true) {
+                case is_int($value):
+                    $type = PDO::PARAM_INT;
+                    break;
+                case is_bool($value):
+                    $type = PDO::PARAM_BOOL;
+                    break;
+                case is_null($value):
+                    $type = PDO::PARAM_NULL;
+                    break;
+                default:
+                    $type = PDO::PARAM_STR;
+            }
+
+
+            // $this->stmt->bindValue($param, $value, $type);
+            $this->bind($param, $value, $type);
+        }
+    }
+
     public function execute()
     {
         $this->stmt->execute();

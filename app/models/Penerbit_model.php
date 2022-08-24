@@ -1,38 +1,50 @@
 <?php
 
-class Penerbit_model {
-    
+class Penerbit_model
+{
+
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new Database;
     }
 
-    public function getAllPenerbit() {
+    public function getAllPenerbit()
+    {
         $this->db->query("SELECT * FROM penerbit");
         return $this->db->resultSet();
     }
 
-    public function getPenerbitById($id) {
+    public function getPenerbitById($id)
+    {
         $this->db->query("SELECT * FROM penerbit WHERE id = '$id'");
         return $this->db->single();
     }
 
-    public function insertPenerbit($data) {
+    public function insertPenerbit($data)
+    {
         $nama_penerbit = htmlspecialchars($data['nama_penerbit']);
         $alamat = htmlspecialchars($data['alamat']);
         $no_telp = htmlspecialchars($data['no_telp']);
-    
+
         $sql = "INSERT INTO penerbit VALUES
         (null, :nama_penerbit, :alamat, :no_telp)";
         $this->db->query($sql);
-        $this->db->bind('nama_penerbit', $nama_penerbit);
-        $this->db->bind('alamat', $alamat);
-        $this->db->bind('no_telp', $no_telp);
+        $fields = [
+            'nama_penerbit' => $nama_penerbit,
+            'alamat' => $alamat,
+            'no_telp' => $no_telp
+        ];
+        $this->db->binds($fields);
+        // $this->db->bind('nama_penerbit', $nama_penerbit);
+        // $this->db->bind('alamat', $alamat);
+        // $this->db->bind('no_telp', $no_telp);
         $this->db->execute();
     }
 
-    public function updatePenerbit($id, $data) {
+    public function updatePenerbit($id, $data)
+    {
         $nama_penerbit = htmlspecialchars($data['nama_penerbit']);
         $alamat = htmlspecialchars($data['alamat']);
         $no_telp = htmlspecialchars($data['no_telp']);
@@ -43,14 +55,22 @@ class Penerbit_model {
                 no_telp = :no_telp
                 WHERE id = :id";
         $this->db->query($sql);
-        $this->db->bind('nama_penerbit', $nama_penerbit);
-        $this->db->bind('alamat', $alamat);
-        $this->db->bind('no_telp', $no_telp);
-        $this->db->bind('id', $id);
+        $fields = [
+            'nama_penerbit' => $nama_penerbit,
+            'alamat' => $alamat,
+            'no_telp' => $no_telp,
+            'id' => $id
+        ];
+        $this->db->binds($fields);
+        // $this->db->bind('nama_penerbit', $nama_penerbit);
+        // $this->db->bind('alamat', $alamat);
+        // $this->db->bind('no_telp', $no_telp);
+        // $this->db->bind('id', $id);
         $this->db->execute();
     }
 
-    public function hapusPenerbit($id) {
+    public function hapusPenerbit($id)
+    {
         //Cek apakah id penerbit ada dalam database
         $this->db->query("SELECT id FROM penerbit WHERE id = '$id'");
         $row = $this->db->numRows();

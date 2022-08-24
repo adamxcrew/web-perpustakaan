@@ -1,20 +1,24 @@
 <?php
 
-class Buku_model{
-    
+class Buku_model
+{
+
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new Database;
     }
 
-    public function getAllBuku() {
+    public function getAllBuku()
+    {
         $this->db->query("SELECT buku.*, kategori.nama_kategori FROM buku
         JOIN kategori ON id_kategori = kategori.id");
         return $this->db->resultSet();
     }
 
-    public function getDetailBuku($id) {
+    public function getDetailBuku($id)
+    {
         $this->db->query("SELECT buku.*, kategori.nama_kategori, penerbit.nama_penerbit FROM buku
         JOIN kategori ON buku.id_kategori = kategori.id
         JOIN penerbit ON buku.id_penerbit = penerbit.id
@@ -22,12 +26,14 @@ class Buku_model{
         return $this->db->single();
     }
 
-    public function countBuku() {
+    public function countBuku()
+    {
         $this->db->query("SELECT COUNT(*) FROM buku");
         return $this->db->numRows();
     }
 
-    public function tambahBuku($data) {
+    public function tambahBuku($data)
+    {
         $judul = htmlspecialchars($data['judul']);
         $penerbit = htmlspecialchars($data['penerbit']);
         $tahun = htmlspecialchars($data['tahun']);
@@ -40,13 +46,16 @@ class Buku_model{
         (null, :judul, :penerbit, :tahun, :penulis, :isbn, :kategori, :tgl_input)";
 
         $this->db->query($query);
-        $this->db->bind('judul', $judul);
-        $this->db->bind('penerbit', $penerbit);
-        $this->db->bind('tahun', $tahun);
-        $this->db->bind('penulis', $penulis);
-        $this->db->bind('isbn', $isbn);
-        $this->db->bind('kategori', $kategori);
-        $this->db->bind('tgl_input', $tgl_input);
+        $fields = [
+            'judul' => $judul,
+            'penerbit' => $penerbit,
+            'tahun' => $tahun,
+            'penulis' => $penulis,
+            'isbn' => $isbn,
+            'kategori' => $kategori,
+            'tgl_input' => $tgl_input
+        ];
+        $this->db->binds($fields);
 
         try {
             $this->db->execute();
@@ -60,14 +69,15 @@ class Buku_model{
         return $this->db->rowCount();
     }
 
-    public function ubahBuku($id, $data) {
+    public function ubahBuku($id, $data)
+    {
         $judul = htmlspecialchars($data['judul']);
         $penerbit = htmlspecialchars($data['penerbit']);
         $tahun = htmlspecialchars($data['tahun']);
         $penulis = htmlspecialchars($data['penulis']);
         $isbn = htmlspecialchars($data['isbn']);
         $kategori = htmlspecialchars($data['kategori']);
-    
+
         $sql = "UPDATE buku SET
                 judul = :judul,
                 id_penerbit = :penerbit,
@@ -76,15 +86,17 @@ class Buku_model{
                 isbn = :isbn,
                 id_kategori = :kategori
                 WHERE id = :id";
-        
+
         $this->db->query($sql);
-        $this->db->bind('judul', $judul);
-        $this->db->bind('penerbit', $penerbit);
-        $this->db->bind('tahun', $tahun);
-        $this->db->bind('penulis', $penulis);
-        $this->db->bind('isbn', $isbn);
-        $this->db->bind('kategori', $kategori);
-        $this->db->bind('id', $id);
+        $fields = [
+            'judul' => $judul,
+            'penerbit' => $penerbit,
+            'tahun' => $tahun,
+            'penulis' => $penulis,
+            'isbn' => $isbn,
+            'kategori' => $kategori,
+        ];
+        $this->db->binds($fields);
 
         try {
             $this->db->execute();
@@ -98,7 +110,8 @@ class Buku_model{
         return $this->db->rowCount();
     }
 
-    public function hapusBuku($id) {
+    public function hapusBuku($id)
+    {
         //Cek apakah id buku ada dalam database
         $this->db->query("SELECT id FROM buku WHERE id = '$id'");
         $row = $this->db->numRows();

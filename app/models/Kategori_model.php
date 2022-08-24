@@ -1,24 +1,29 @@
-<?php 
+<?php
 
-class Kategori_model {
-    
+class Kategori_model
+{
+
     private $db;
 
-    public function __construct() {
+    public function __construct()
+    {
         $this->db = new Database;
     }
 
-    public function getAllKategori() {
+    public function getAllKategori()
+    {
         $this->db->query("SELECT * FROM kategori");
         return $this->db->resultSet();
     }
 
-    public function getKategoriById($id) {
+    public function getKategoriById($id)
+    {
         $this->db->query("SELECT * FROM kategori where id = '$id'");
         return $this->db->single();
     }
 
-    public function tambahKategori($data) {
+    public function tambahKategori($data)
+    {
         $nama_kategori = htmlspecialchars($data['nama_kategori']);
         $keterangan = htmlspecialchars($data['keterangan']);
 
@@ -30,7 +35,8 @@ class Kategori_model {
         $this->db->execute();
     }
 
-    public function updateKategori($id, $data) {
+    public function updateKategori($id, $data)
+    {
         $nama_kategori = htmlspecialchars($data['nama_kategori']);
         $keterangan = htmlspecialchars($data['keterangan']);
 
@@ -38,15 +44,22 @@ class Kategori_model {
                 nama_kategori = :nama_kategori,
                 keterangan = :keterangan
                 WHERE id = :id";
-        
+
         $this->db->query($sql);
-        $this->db->bind('nama_kategori', $nama_kategori);
-        $this->db->bind('keterangan', $keterangan);
-        $this->db->bind('id', $id);
+        $fields = [
+            'nama_kategori' => $nama_kategori,
+            'keterangan' => $keterangan,
+            'id' => $id
+        ];
+        $this->db->binds($fields);
+        // $this->db->bind('nama_kategori', $nama_kategori);
+        // $this->db->bind('keterangan', $keterangan);
+        // $this->db->bind('id', $id);
         $this->db->execute();
     }
 
-    public function hapusKategori($id) {
+    public function hapusKategori($id)
+    {
         //Cek apakah id kategori ada dalam database
         $this->db->query("SELECT id FROM kategori WHERE id = '$id'");
         $row = $this->db->numRows();
